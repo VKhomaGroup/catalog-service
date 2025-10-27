@@ -34,13 +34,19 @@ public class BookService {
     public Book editBookDetails(String isbn, Book book) {
         return bookRepository.findByIsbn(isbn)
                 .map(existingBook -> {
-                    Book bookToUpdate = new Book(
+                    var bookToUpdate = new Book(
+                            existingBook.id(),
                             existingBook.isbn(),
                             book.title(),
                             book.author(),
-                            book.price());
+                            book.price(),
+                            book.publisher(),
+                            existingBook.createdDate(),
+                            existingBook.lastModifiedDate(),
+                            existingBook.version());
                     return bookRepository.save(bookToUpdate);
                 })
-                .orElseThrow(() -> new BookNotFoundException(isbn));
+                .orElseGet(() -> addBookToCatalog(book));
     }
+
 }
