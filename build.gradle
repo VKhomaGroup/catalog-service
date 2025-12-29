@@ -10,7 +10,7 @@ description = 'Provides functionality for managing the books in the catalog.'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(25)
+		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
 
